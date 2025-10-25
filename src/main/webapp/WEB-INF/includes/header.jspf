@@ -32,15 +32,17 @@
         <% } %>
       </ul>
       <div class="d-flex">
-        <% if (u == null) { %>
-          <a class="btn btn-outline-primary me-2" href="${pageContext.request.contextPath}/login">Login</a>
-          <a class="btn btn-primary" href="${pageContext.request.contextPath}/register">Register</a>
-        <% } else { %>
-          <form method="post" action="${pageContext.request.contextPath}/logout">
-            <button class="btn btn-danger">Logout</button>
-          </form>
-        <% } %>
-      </div>
+  <% if (u == null) { %>
+    <a class="btn btn-outline-primary me-2" href="${pageContext.request.contextPath}/login">Login</a>
+    <a class="btn btn-primary" href="${pageContext.request.contextPath}/register">Register</a>
+  <% } else { %>
+    <a class="btn btn-primary me-2" href="${pageContext.request.contextPath}/profile">Profile</a>
+    <form method="post" action="${pageContext.request.contextPath}/logout">
+      <button class="btn btn-danger">Logout</button>
+    </form>
+  <% } %>
+</div>
+
     </div>
   </div>
 </nav>

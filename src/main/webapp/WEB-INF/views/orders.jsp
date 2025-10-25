@@ -4,6 +4,17 @@
   // expects: request attribute "orders" = List<Order>
   var orders = (java.util.List<com.mycompany.emsclothing.model.Order>) request.getAttribute("orders");
 %>
+<%
+String msg = request.getParameter("msg");
+String err = request.getParameter("err");
+if ("cancelled".equals(msg)) {
+%>
+<div class="alert alert-warning">
+    Refund process initiated. Order has been cancelled.
+  </div>
+<% } else if ("notfound".equals(err)) { %>
+  <div class="alert alert-danger">Order not found or unauthorized.</div>
+<% } %>
 
 <div class="d-flex align-items-center justify-content-between mb-3">
   <h3 class="mb-0">My Orders</h3>
@@ -29,6 +40,7 @@
             <th>Status</th>
             <th class="text-end" style="width:140px;">Total</th>
             <th style="width:140px;"></th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -42,7 +54,7 @@
                     "SHIPPED".equals(o.getStatus())   ? "bg-info" :
                     "PAID".equals(o.getStatus())      ? "bg-primary" :
                     "CANCELLED".equals(o.getStatus())  ? "bg-secondary" : "bg-warning" %>">
-                <%= o.getStatus()==null ? "PENDING" : o.getStatus() %>
+                <%= o.getStatus()==null ? "Paid" : o.getStatus() %>
               </span>
             </td>
             <td class="text-end">$<%= String.format("%.2f", o.getTotal()) %></td>
@@ -50,6 +62,17 @@
               <a class="btn btn-sm btn-outline-secondary"
                  href="${pageContext.request.contextPath}/orders/<%= o.getId() %>">View</a>
             </td>
+            <td class="text-end">
+  <%-- Existing view or total columns stay as-is --%>
+  <form method="post" action="${pageContext.request.contextPath}/orders/cancel" style="display:inline;">
+    <input type="hidden" name="id" value="<%= o.getId() %>">
+    <button class="btn btn-sm btn-outline-danger" 
+            onclick="return confirm('Are you sure you want to cancel this order?')">
+      Cancel
+    </button>
+  </form>
+</td>
+
           </tr>
         <% } %>
         </tbody>
