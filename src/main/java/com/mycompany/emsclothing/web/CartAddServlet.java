@@ -5,7 +5,7 @@ import com.mycompany.emsclothing.model.CartItem;
 import com.mycompany.emsclothing.model.Product;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import jakarta.servlet.*; 
+import jakarta.servlet.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,12 @@ public class CartAddServlet extends HttpServlet {
         Product p = dao.find(productId);
         if (p == null || qty < 1) {
             resp.sendRedirect(req.getContextPath() + "/products");
+            return;
+        }
+
+        // Added stock check
+        if (p.getStock() < qty) {
+            resp.sendRedirect(req.getContextPath() + "/product?id=" + productId);
             return;
         }
 
