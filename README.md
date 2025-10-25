@@ -4,7 +4,7 @@
 
 🧑‍🎓 STUDENT DETAILS
 ---------------------------------------------------------------------
-Name: Roshan Neupane (63014), Sujan Shilakar (62903), MaiMuna Rahman Muna (63744)
+Name: Roshan Neupane (63014), Sujan Shilakar (62903), Maimuna Rahman Muna (63744)
 Course: Master of Information Technology
 Institute: Victorian Institute of Technology (VIT), Adelaide
 Project Title: EMS Clothing Store – E-Commerce Web Application
